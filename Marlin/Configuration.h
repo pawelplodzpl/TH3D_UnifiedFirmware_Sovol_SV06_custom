@@ -34,7 +34,7 @@
 // ***********   SOVOL PRINTERS w/V1.3.1 Board - GD32F103 CPU   *************
 //===========================================================================
 #define SOVOL_SV06
-// #define SOVOL_SV06_FILAMENT_SENSOR
+#define SOVOL_SV06_FILAMENT_SENSOR
 
 
 // #define SOVOL_SV06_PLUS                 //REQUIRES LCD KIT FOUND HERE: https://www.th3dstudio.com/product/sovol-sv06-plus-12864-lcd-conversion-upgrade-kit/
@@ -82,7 +82,7 @@
 #define EZABL_POINTS 7
 
 // Probe Edge - How far from the edge of the bed to probe from. Use 50 if using binder clips. This also sets the edge inset value for MANUAL_MESH_LEVELING.
-#define EZABL_PROBE_EDGE 25
+#define EZABL_PROBE_EDGE 25 // No less than 25 - for SV06 any less will make the printhead hit the limit on the left side
 
 // Fast Probing - Works with most machines and all EZABL sensors (8mm/s)
 #define EZABL_FASTPROBE
@@ -154,16 +154,16 @@
 // If you need to reverse the e motor direction also enabled the REVERSE_E_MOTOR_DIRECTION option.
 // Example EStep Values: TH3D Aluminum Extruder - 95 ESteps, TH3D Tough Extruder - 410 ESteps, BMG Extruder - 415 ESteps
 // When installing a Tough Extruder or E3D Titan or Bondtech that is Geared you likely need to enable the REVERSE_E_MOTOR_DIRECTION option
-//#define CUSTOM_ESTEPS
+#define CUSTOM_ESTEPS
 #define CUSTOM_ESTEPS_VALUE 691.50
 //#define REVERSE_E_MOTOR_DIRECTION
 
 // FILAMENT SENSOR UNLOAD SETTINGS -----------------
 // If you have a filament sensor that is physically mounted to the machine you can enable MOUNTED_FILAMENT_SENSOR to set the unload length to 5mm to prevent filament from backing up in the sensor by uncommenting MOUNTED_FILAMENT_SENSOR 
-//#define MOUNTED_FILAMENT_SENSOR
+#define MOUNTED_FILAMENT_SENSOR
 
 // If you have a direct drive machine with a filament sensor uncomment DIRECT_DRIVE_PRINTER to decrease the unload length from 100mm to 20mm
-//#define DIRECT_DRIVE_PRINTER
+// #define DIRECT_DRIVE_PRINTER
 
 // THERMISTOR SETTINGS -----------------------------
 
@@ -312,7 +312,7 @@
  
 //SV06 V131 Board Settings
 #if ANY(SOVOL_SV06, SOVOL_SV06_PLUS)
-  #if (ENABLED(SOVOL_SV06_PLUS) || ENABLED(SOVOL_SV06_FILAMENT_SENSOR)) && DISABLED(SV06_PLUS_NOFILAMENT_SENSOR)
+  #if (ENABLED(SOVOL_SV06_PLUS) && DISABLED(SV06_PLUS_NOFILAMENT_SENSOR)) || ENABLED(SOVOL_SV06_FILAMENT_SENSOR)
     #define EZOUT_ENABLE
   #endif
   
